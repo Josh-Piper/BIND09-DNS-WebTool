@@ -1,0 +1,7 @@
+#!/usr/local/bin/bash
+
+#Declare user accounts to login:
+FIRST_ACCOUNT_USERNAME="Lemonade"
+FIRST_ACCOUNT_PASSWORD="Stand"
+SECOND_ACCOUNT_USERNAME="Juice"
+SECOND_ACCOUNT_PASSWORD="Boost"

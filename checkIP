@@ -1,0 +1,28 @@
+#!/usr/local/bin/python
+
+#Required imports for DNSPython
+import dns.zone
+import dns.query
+import dns.update
+import dns.rdataset
+import dns.resolver
+import dns.tsigkeyring
+import dns.rdtypes.IN.A
+import socket
+import sys
+import os
+import signal
+from dns.exception import DNSException
+from netaddr import IPNetwork, IPAddress, valid_ipv4, ZEROFILL
+from subprocess import call
+
+def main():
+    if (valid_ipv4(sys.argv[1], flags=NOHOST)):
+        print('Valid IPv4')
+    else:
+        print('invalid')    
+
+
+#Start Main
+if __name__ == '__main__':
+    main()

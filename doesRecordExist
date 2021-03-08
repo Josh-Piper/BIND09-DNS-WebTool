@@ -1,0 +1,63 @@
+#!/usr/local/bin/python
+
+#Required imports for DNSPython
+import dns.zone
+import dns.query
+import dns.update
+import dns.resolver
+import dns.rdtypes.IN.A
+import socket
+import sys
+import os
+import re
+
+			
+#Main Program.
+def main():
+       
+    with open('./getRecordsFromZoneContainsKey.txt', 'w') as f:
+        try:
+            search_record = sys.argv[1]
+            type = sys.argv[2]
+            zone = sys.argv[3]
+        
+            records_list = ""
+
+            #get all name servers
+            soa_answer = dns.resolver.resolve(zone, 'SOA')
+
+
+            #get primary name server #dns.resolver.query
+            master_answer = dns.resolver.resolve(soa_answer[0].mname, 'A')
+
+            #get list of records
+            z = dns.zone.from_xfr(dns.query.xfr(master_answer[0].address, zone))
+
+            #print all records in valid type
+            for n in sorted(z.nodes.keys()):
+                answer = (z[n].to_text(n))
+                records_list += str(answer) + "\n"   
+
+#                print(records_list)    
+
+            for line in records_list.splitlines():
+                doesHasSubDomain = line.startswith(search_record)
+                arrLine = line.split()
+                doesContainType = type == arrLine[3]
+
+
+#                print("Contains Subdomain: " + str(doesHasSubDomain))
+#                print("Contains Type: " + str(doesContainType))
+
+                if (str(doesHasSubDomain) == "True" and str(doesContainType) == "True"):
+                    print("True", file=f)
+                    exit() 
+
+            print("False", file=f)
+
+        except Exception as e:
+            print("False: " + str(e), file=f)
+
+#Start Main
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,62 @@
+ body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	background: gray;
+	color: white;
+}
+
+form {
+	align-items: center;
+	text-align: center;
+	width: 400px;
+	border-radius: 16px;
+	display: block;
+	height: 250px;
+	padding: 40px;
+	color: black;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 3px 3px 2px lightgray;
+	background: #fcfcfc;
+}
+
+form td {
+	color: black;
+}
+
+form input[type="submit"] {
+	display: inline-block;
+	margin-top: 30px;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+	background: #3c4fcf;
+	font-size: 20px;
+	color: white;
+}
+
+table {
+	color: fcfcfc;
+	background: #E8E8E8;
+	text-align: center;
+}
+
+#zones-form {
+	height: 450px;
+}
+
+#delete-btn {
+	background: #DC143C;
+}
+
+.gray-btn {
+	background: #C8C8C8;
+	border: none;
+}
+
+.logged {
+	text-align: center;
+}

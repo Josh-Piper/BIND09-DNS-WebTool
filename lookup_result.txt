@@ -1,0 +1,6 @@
+Server:		136.186.230.122
+Address:	136.186.230.122#53
+
+** server can't find brillagagiant.Unix: NXDOMAIN
+
+256

@@ -1,0 +1,39 @@
+#!/usr/local/bin/python3
+
+import re
+import sys
+import dns.zone
+import dns.update
+import dns.query
+import dns.tsigkeyring
+import dns.resolver
+from dns.exception import DNSException
+
+def test_dns_python():
+	name = 'iana.org'
+	for qtype in 'A', 'AAAA', 'MX', 'NS', 'TXT', 'SOA':
+		answer = dns.resolver.resolve(name,qtype, raise_on_no_answer=False)
+	if answer.rrset is not None:
+		print(answer.rrset)
+
+def main():
+	try:
+		keyring = dns.tsigkeyring.from_text({
+		'ddns.key' : 'vgwHU16TVZaG6o57OdnMqJGaQf89Rd6/FCfBjEFKQTg='})
+
+		update = dns.update.Update('minecraft.com.', keyring=keyring)
+		update.replace('host', 300, 'a', sys.argv[1])
+
+		response = dns.query.tcp(update, '10.0.0.1')
+	#except Exception as e:
+	#	print('issue with formatting. Please re-enter values')
+	#	print(e)
+	#	return
+
+
+####################################################################################################################
+#########################################################
+# Main
+#########################################################
+if __name__ == '__main__':
+    main()
